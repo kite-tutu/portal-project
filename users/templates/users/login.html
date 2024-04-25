@@ -1,0 +1,48 @@
+{% extends 'users/base.html' %}
+{% load crispy_forms_tags %}
+    <title>
+    {% block titleContent %}
+    Coop Portal | Login 
+    {% endblock titleContent %}
+    </title>
+   
+    
+            {% block headerContent %}
+            <h3 class="text-center"> CIVIL SERVANTS MPCS PORTAL</h3>
+            <h4 class="text-center"><small> Member Login | <a   href="{% url 'admin:index' %}"> Admin Login </a></small></h4>
+            {% endblock headerContent %}
+          
+          {% block mainContent %}
+          <div class="col-md-4 col-md-offset-4">      
+              <form method = "POST" id="login" class="well">
+                {% csrf_token %}
+                <!--<div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="text" class="form-control" placeholder="password">
+                </div>-->
+                {{ form | crispy }}
+
+                <div>
+                    <button type="submit" class="btn btn-default">Login</button>
+                    <small class="text-muted ml-2">
+                        <a href="{% url 'password_reset' %}">Forgot Password?</a>
+                    </small>
+                </div>
+
+                
+              </form>
+
+              <div class="border-top pt-3">
+                    <small class="text-muted">
+                        <p> Need an Account?<a class="ml-2" href="{% url 'signup' %}"> Sign Up </a> </p>
+                    </small>
+                </div>
+              
+          </div>
+
+ {% endblock mainContent %}
+        

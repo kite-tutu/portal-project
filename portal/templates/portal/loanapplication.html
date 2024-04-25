@@ -1,0 +1,74 @@
+{% extends 'portal/base.html' %}
+{% load mathfilters %} 
+{% load balance %}
+
+{% block sideLinks %}
+              <a href="{% url 'dashboard' %}" class="list-group-item ">
+              <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>  Dashboard
+              </a>
+              <a href="{% url 'transactions' %}" class="list-group-item"> <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Transactions </a>
+              <!--<a href="posts.html" class="list-group-item"> <span class="glyphicon glyphicon-list" aria-hidden="true"></span> Account Statement </a>-->
+              <a href="{% url 'application' %}" class="list-group-item active main-color-bg"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Apply For Loan </a>
+              <a href="#" class="list-group-item"> <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Payment Evidence </a>
+              <a href="#" class="list-group-item"> <span class="glyphicon glyphicon-share" aria-hidden="true"></span> Withdrawal Request </a>
+              <!--<a href="user.html" class="list-group-item"> <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Coop Shop </a>-->
+              <!--<a href="user.html" class="list-group-item"> <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> E-Wallet Transactions </a>-->
+              <a href="{% url 'shop-index' %}" class="list-group-item"> <span class="glyphicon glyphicon-share" aria-hidden="true"></span> Shop </a>
+{% endblock sideLinks %}
+
+{% load crispy_forms_tags %}
+
+{% block mainContent %}
+
+{% if messages %}
+          {% for message in messages %}
+            <div class = "alert alert-{{ message.tags }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+{% endif %}
+
+  <div class="row">
+    <div class="col-md-12 col-sm-10 col-12">
+      <h2></h2>
+      <form method="post" novalidate>
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success">Apply</button>
+        <p></p>
+      </form>
+      <br>
+     
+
+     <div class="panel panel-default">
+      <div class="panel-heading main-color-bg">
+        <h3 class="panel-title">LOAN APPLICATIONS FOR THE FINANCIAL YEAR</h3>
+      </div>
+      <div class="panel-body">
+        {% for loan in loan_applications %}
+        <div class="col-md-3">
+          <label>Date : </label> {{ loan.date }}
+        </div>
+
+        <div class="col-md-3">
+          <label>Month : </label> {{ loan.month }} 
+        </div> 
+
+        <div class="col-md-3">
+          <label>Amount : </label> {{ loan.loan_amount|currency }}
+        </div> 
+
+        <div class="col-md-3">
+          <label>Status : </label> {{ loan.loan_status }}
+        </div> 
+
+      {% endfor %}
+            
+      </div>
+    </div>
+      
+
+    </div>
+  </div>
+{% endblock mainContent %}

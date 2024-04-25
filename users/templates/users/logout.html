@@ -1,0 +1,25 @@
+{% extends 'users/base.html' %}
+
+    <title>
+    {% block titleContent %}
+    Coop Portal | Logout 
+    {% endblock titleContent %}
+    </title>
+    
+            {% block headerContent %}
+            <h3 class="text-center"> CIVIL SERVANTS MPCS PORTAL</h3>
+            <h4 class="text-center"><small> Account Logout</small></h4>
+            {% endblock headerContent %}
+          
+          {% block mainContent %}
+          <div class="col-md-4 col-md-offset-4">      
+              
+
+                <div>
+                    <a href="{% url 'login' %}" class="ml-2">Login Again</a>
+                </div>
+              
+          </div>
+
+ {% endblock mainContent %}
+        
